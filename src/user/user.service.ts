@@ -20,9 +20,9 @@ export class UserService {
     return user;
   }
 
-  async getByIEmail(id: string) {
+  async getByIEmail(email: string) {
     const user = await this.prisma.user.findUnique({
-      where: { id },
+      where: { email },
       include: {
         stores: true,
         favorites: true,

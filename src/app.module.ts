@@ -11,6 +11,7 @@ import { OrderModule } from './order/order.module';
 import { StatisticsModule } from './statistics/statistics.module';
 import { FileModule } from './file/file.module';
 import { ProductModule } from './product/product.module';
+import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ProductModule } from './product/product.module';
     StatisticsModule,
     FileModule,
     ProductModule,
+    ReviewModule,
   ],
   controllers: [AppController],
   providers: [AppService],

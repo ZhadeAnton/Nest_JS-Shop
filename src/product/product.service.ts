@@ -9,7 +9,7 @@ export class ProductService {
   async getAll(searchTerm?: string) {
     if (searchTerm) return this.getSearchtermFilter(searchTerm);
 
-    const products = await this.prisma.product.findMany({
+    return await this.prisma.product.findMany({
       orderBy: { createdAt: 'desc' },
       include: {
         category: true,
@@ -17,24 +17,17 @@ export class ProductService {
         color: true,
       },
     });
-
-    return products;
   }
 
   private getSearchtermFilter(searchTerm: string) {
-    return {
-      OR: [
-        [
-          {
-            title: { contains: searchTerm, mode: 'insensitive' },
-            description: {
-              contains: searchTerm,
-              mode: 'insensitive',
-            },
-          },
+    return this.prisma.product.findMany({
+      where: {
+        OR: [
+          { title: { contains: searchTerm } },
+          { description: { contains: searchTerm } },
         ],
-      ],
-    };
+      },
+    });
   }
 
   async getByStoreId(storeId: string) {

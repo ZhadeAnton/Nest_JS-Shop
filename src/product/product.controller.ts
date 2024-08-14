@@ -20,7 +20,7 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get()
-  async getAllProducts(@Query() searchTerm?: string) {
+  async getAllProducts(@Query('searchTerm') searchTerm?: string) {
     return this.productService.getAll(searchTerm);
   }
 
